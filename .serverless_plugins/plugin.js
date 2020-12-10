@@ -83,8 +83,8 @@ class MyCustomPlugin {
       },
     };
     this.hooks = {
-      // 'after:deploy:deploy': uploadFile.bind(null, serverless, options),
-      'copy-content:triggerActions': triggerActions.bind(null, serverless, options),
+      'after:deploy:deploy': uploadFile.bind(null, serverless, options),
+      // 'copy-content:triggerActions': triggerActions.bind(null, serverless, options),
     };
   }
 }

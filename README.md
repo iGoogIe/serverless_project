@@ -38,6 +38,8 @@ In the root of project you can run
 
 This will run npm install and serverless deploy
 
+## Run Plugin locally by itself
+
 If you want to try running the plugin by itself you'll need to make a code change in .serverless_plugins/plugin.js
 
 Change

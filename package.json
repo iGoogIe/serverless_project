@@ -1,0 +1,15 @@
+{
+  "name": "flux",
+  "version": "1.0.0",
+  "description": "code assignment",
+  "main": "handler.js",
+  "scripts": {
+    "start": "npm install && serverless deploy"
+  },
+  "author": "Jey Farmer",
+  "license": "ISC",
+  "devDependencies": {
+    "await-to-js": "^2.1.1",
+    "aws-sdk": "^2.806.0"
+  }
+}

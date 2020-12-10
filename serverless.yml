@@ -1,0 +1,60 @@
+app: my-first-app
+# org: jeyfarmer
+service: flux
+plugins:
+  localPath: './.serverless_plugins'
+  modules:
+    - plugin
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+      - "s3:PutObject" 
+    Resource: 
+      - "arn:aws:s3:::${self:custom.myS3Bucket}/*"
+
+custom:
+  myS3Bucket: flux-bucket-2020
+  myDynamoTable: flux-files-2020
+  # stage: ${opt:stage, self:provider.stage}
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /hello
+          method: get
+  uploadFile:
+    handler: handler.uploadFile
+    events:
+        - http:
+            path: /uploadFile
+            method: get
+    environment:
+      bucketName: ${self:custom.myS3Bucket}
+      tableName: ${self:custom.myDynamoTable}
+
+resources:
+  Resources:
+    CreateS3Bucket:
+        Type: AWS::S3::Bucket
+        Properties: 
+          BucketName: ${self:custom.myS3Bucket}
+    CreateDynamoDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.myDynamoTable}
+        AttributeDefinitions:
+          - AttributeName: upload
+            AttributeType: S
+        KeySchema:
+          - AttributeName: upload
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

@@ -61,6 +61,10 @@ npm start kicks off the Serverless deployment process. The Custom plugin is trig
 ## Known Limitations
 I had trouble triggering the lambda from serverless.yml. As a work around, I ensure it creates the lambda, then I use the custom plugin I wrote to trigger a local script in functions/uploader.js .
 
+If you'd like to manually test the lambda, you can click the endpoints shown in terminal after the Serverless deploy i.e 
+
+```https://<unique_value_here>.execute-api.us-east-1.amazonaws.com/dev/uploadFile```
+
 ## Issues You May Encounter
 S3 Buckets must be Globally Unique. I didn't find a great way to implement this so if you encounter an S3 related error you may need to change the bucket name in serverless.yml
 

@@ -44,7 +44,7 @@ If you want to try running the plugin by itself you'll need to make a code chang
 
 Change
 
-```'after:deploy:deploy': uploadFile.bind(null, serverless, options),```
+```'after:deploy:deploy': triggerActions.bind(null, serverless, options),```
 
 to the commented out line below it
 

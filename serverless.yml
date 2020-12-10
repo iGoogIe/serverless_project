@@ -20,17 +20,11 @@ provider:
       - "arn:aws:s3:::${self:custom.myS3Bucket}/*"
 
 custom:
-  myS3Bucket: flux-bucket-2020
+  myS3Bucket: flux-bucket-2020-1
   myDynamoTable: flux-files-2020
   # stage: ${opt:stage, self:provider.stage}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /hello
-          method: get
   uploadFile:
     handler: handler.uploadFile
     events:

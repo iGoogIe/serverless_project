@@ -22,11 +22,14 @@ const triggerActions = async (serverless, options) => {
         Bucket: bucket,
         Key: fileName
       }
+      console.log("Attempting to pull Object from S3")
       const [errS3, resultS3] = await to (s3.getObject(params).promise())
 
       if (resultS3) {
         const fileContent = resultS3.Body.toString('utf-8')
-        console.log(`Here are the contents of the file that we'll be uploading to DynamoDB: ${fileContent}`)
+        console.log("Successfully Pulled Object from S3")
+        console.log(`Here are the contents of the Object that we'll be uploading to DynamoDB: ${fileContent}`)
+        console.log(`Attempting to upload Item to DynamoDB Table : ${tableName}`)
 
         params = {
           Item: {
@@ -41,7 +44,9 @@ const triggerActions = async (serverless, options) => {
         const [errDynamo, resultDynamo] = await to (dynamodb.putItem(params).promise())
 
         if (resultDynamo) {
+          console.log(`Successfully Uploaded file to DynamoDB table ${tableName}`)
           console.log(resultDynamo)
+          console.log("Exiting Plugin")
         }
         
         else if (errDynamo) {
@@ -83,7 +88,7 @@ class MyCustomPlugin {
       },
     };
     this.hooks = {
-      'after:deploy:deploy': uploadFile.bind(null, serverless, options),
+      'after:deploy:deploy': triggerActions.bind(null, serverless, options),
       // 'copy-content:triggerActions': triggerActions.bind(null, serverless, options),
     };
   }

@@ -8,7 +8,7 @@ module.exports.uploadFile = async bucket => {
   const params = {
     Bucket: bucket,
     Key: fileName,
-    Body: "Test Message Here",
+    Body: "Here is some content to fill the file we will upload in S3",
     ContentType: "text/html",
   }
 
@@ -18,7 +18,7 @@ module.exports.uploadFile = async bucket => {
   let [err, result] = await to (s3.upload(params).promise())
 
   if (result) {
-      console.log(`Successfully uploaded file`)
+      console.log(`Successfully uploaded file to S3`)
       return {
         statusCode: 200,
         body: JSON.stringify('Successfully uploaded file'),

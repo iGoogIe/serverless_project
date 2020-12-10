@@ -12,7 +12,8 @@ You will also need to link your AWS Provider with your Serverless Account
 
 Your IAM User's Access Key will need to have an AdministratorAccess Policy attached directly to the User
 
-```{
+```javascript
+{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -21,7 +22,8 @@ Your IAM User's Access Key will need to have an AdministratorAccess Policy attac
             "Resource": "*"
         }
     ]
-}```
+}
+```
 
 ## Deployment
 In the root of project you can run

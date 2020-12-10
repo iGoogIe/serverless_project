@@ -20,7 +20,7 @@ provider:
       - "arn:aws:s3:::${self:custom.myS3Bucket}/*"
 
 custom:
-  myS3Bucket: flux-bucket-2020-1
+  myS3Bucket: flux-bucket-2020
   myDynamoTable: flux-files-2020
   # stage: ${opt:stage, self:provider.stage}
 
